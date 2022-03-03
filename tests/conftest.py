@@ -3,6 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+
 from utilities.BaseClass import BaseClass
 
 driver = None
@@ -20,11 +23,14 @@ def setup(request):
     global driver
     browser_name = request.config.getoption("browser_name")
     if browser_name == 'chrome':
-        driver = webdriver.Chrome(
-            executable_path = BaseClass.ROOT_PATH + "/drivers/"+"chromedriver")
+        driver = webdriver.Chrome(ChromeDriverManager().install())
     elif browser_name == 'firefox':
-        driver = webdriver.Firefox(
-            executable_path=BaseClass.ROOT_PATH + "/drivers/"+"geckodriver")
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    elif browser_name == 'edge':
+        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+    elif browser_name == 'ie':
+        driver = webdriver.Ie(IEDriverManager().install())
+
 
     driver.get("https://rahulshettyacademy.com/angularpractice")
     driver.maximize_window()
