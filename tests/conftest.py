@@ -1,10 +1,13 @@
 import pytest
 from selenium import webdriver
+from datetime import datetime
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager, IEDriverManager
+from selenium.webdriver.chrome.options import Options
 
 from utilities.BaseClass import BaseClass
 
@@ -30,6 +33,10 @@ def setup(request):
         driver = webdriver.Edge(EdgeChromiumDriverManager().install())
     elif browser_name == 'ie':
         driver = webdriver.Ie(IEDriverManager().install())
+    elif browser_name == 'headless:':
+        options = Options()
+        options.headless = True
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 
     driver.get("https://rahulshettyacademy.com/angularpractice")
@@ -54,7 +61,6 @@ def pytest_runtest_makereport(item):
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             tc_name = report.nodeid.split("::")[-1]
-            #tc_name = re.sub(r'\[.*\]', '', tc_name)
             file_name = BaseClass.ROOT_PATH+"/tests/screenshots/"+tc_name + ".png"
             _capture_screenshot(file_name)
             if file_name:
