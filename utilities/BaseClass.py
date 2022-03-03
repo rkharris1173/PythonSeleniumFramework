@@ -15,6 +15,10 @@ from pageObjects.CheckoutPage import CheckoutPage
 @pytest.mark.usefixtures("setup")
 class BaseClass:
     ROOT_PATH = str(Path(__file__).parent.parent)
+    TEST_URL = "https://rahulshettyacademy.com/angularpractice"
+
+
+
 
     def getLogger(self):
         loggerName = inspect.stack()[1][3]

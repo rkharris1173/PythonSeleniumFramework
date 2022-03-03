@@ -13,6 +13,7 @@ from utilities.BaseClass import BaseClass
 
 driver = None
 
+
 def pytest_addoption(parser):
     parser.addoption(
         "--browser_name", action="store", default="chrome"
@@ -38,8 +39,7 @@ def setup(request):
         options.headless = True
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-
-    driver.get("https://rahulshettyacademy.com/angularpractice")
+    driver.get(BaseClass.TEST_URL)
     driver.maximize_window()
     request.cls.driver = driver
     yield
@@ -61,7 +61,7 @@ def pytest_runtest_makereport(item):
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             tc_name = report.nodeid.split("::")[-1]
-            file_name = BaseClass.ROOT_PATH+"/tests/screenshots/"+tc_name + ".png"
+            file_name = BaseClass.ROOT_PATH + "/tests/screenshots/" + tc_name + ".png"
             _capture_screenshot(file_name)
             if file_name:
                 html = '<div><img src="screenshots/%s.png" alt="screenshot" style="width:304px;height:228px;" ' \
@@ -71,6 +71,4 @@ def pytest_runtest_makereport(item):
 
 
 def _capture_screenshot(name):
-        driver.get_screenshot_as_file(name)
-
-
+    driver.get_screenshot_as_file(name)
