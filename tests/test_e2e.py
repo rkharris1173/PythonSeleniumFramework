@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -23,7 +25,6 @@ class TestOne(BaseClass):
         deliverypage = DeliveryPage(self.driver)
 
         homepage.shop_item().click()
-
         cards = checkoutpage.get_card_title()
         i = -1
         for card in cards:
@@ -31,14 +32,17 @@ class TestOne(BaseClass):
             cardtext = card.text
             print(cardtext)
             if cardtext == 'Blackberry':
-                self.checkoutpage.get_card_footer()[i].click()
+                checkoutpage.get_card_footer()[i].click()
         checkoutpage.checkoutitems().click()
 
-        confirmpage.checkoutbtn.click()
-        deliverypage.deliverylocation.send_keys("Ind")
+        confirmpage.checkoutbutton().click()
+        deliverypage.delivery_location_textbox().send_keys("Ind")
         self.verifyLinkPresence("India")
-        deliverypage.terms_checkbox.click()
-        deliverypage.purchase_btn.click()
+
+        self.driver.find_element_by_link_text("India").click()
+
+        deliverypage.terms_checkbox().click()
+        deliverypage.purchase_button().click()
 
         textMatch = self.driver.find_element_by_css_selector("[class*='alert-success']").text
         log.info("Text received from application is " + textMatch)

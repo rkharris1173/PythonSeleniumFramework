@@ -10,15 +10,13 @@ class CheckoutPage:
 
     cardtitle = (By.CSS_SELECTOR, ".card-title a")
     cardfooter = (By.CSS_SELECTOR, ".card-footer button")
-    checkout = (By.XPATH, "//button[@class='btn btn-success']")
+    checkout = (By.CSS_SELECTOR, "a[class*='btn-primary']")
 
     def get_card_title(self):
-        return self.driver.find_element(*CheckoutPage.cardtitle)
+        return self.driver.find_elements(*CheckoutPage.cardtitle)
 
     def get_card_footer(self):
-        return self.driver.find_element(*CheckoutPage.cardfooter)
+        return self.driver.find_elements(*CheckoutPage.cardfooter)
 
     def checkoutitems(self):
-        self.driver.find_element(*CheckoutPage.checkout).click()
-        confirmPage = ConfirmPage(self.driver)
-        return confirmPage
+        return self.driver.find_element(*CheckoutPage.checkout)

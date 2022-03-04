@@ -33,7 +33,9 @@ class BaseClass:
         return logger
 
     def verifyLinkPresence(self, linktext):
-        element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(By.LINK_TEXT, linktext))
+        element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.LINK_TEXT, linktext)))
+        #element.click()
 
     def select_from_dropdown_by_text(self, locator, text):
         sel = Select(locator)
