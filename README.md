@@ -1,7 +1,7 @@
 # PythonSeleniumFramework
 To setup:
   Download PyCharm and install\
-  Download Python and install\
+  Download Python and install(for Windows make sure to select option to add python to patch or add to path after install)\
   Download the framework and open in pycharm
   
   Open Pycharm terminal and run the following:
