@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 
+from utilities.BaseElement import BaseElement
+
 
 class ConfirmPage:
     checkoutbtn = (By.XPATH, "//button[@class='btn btn-success']")
@@ -8,4 +10,4 @@ class ConfirmPage:
         self.driver = driver
 
     def checkoutbutton(self):
-        return self.driver.find_element(*ConfirmPage.checkoutbtn)
+        return BaseElement(self.driver, locator=ConfirmPage.checkoutbtn)

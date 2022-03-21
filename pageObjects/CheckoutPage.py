@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from pageObjects.ConfirmPage import ConfirmPage
+from utilities.BaseElement import BaseElement
 
 
 class CheckoutPage:
@@ -13,10 +14,10 @@ class CheckoutPage:
     checkout = (By.CSS_SELECTOR, "a[class*='btn-primary']")
 
     def get_card_title(self):
-        return self.driver.find_elements(*CheckoutPage.cardtitle)
+        return BaseElement(self.driver, locator=CheckoutPage.cardtitle)
 
     def get_card_footer(self):
-        return self.driver.find_elements(*CheckoutPage.cardfooter)
+        return BaseElement(self.driver, locator=CheckoutPage.cardfooter)
 
     def checkoutitems(self):
-        return self.driver.find_element(*CheckoutPage.checkout)
+        return BaseElement(self.driver, locator=CheckoutPage.checkout)

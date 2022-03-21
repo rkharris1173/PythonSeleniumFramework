@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 
+from utilities.BaseElement import BaseElement
+
 
 class DeliveryPage:
     deliverylocation = (By.ID, "country")
@@ -11,10 +13,10 @@ class DeliveryPage:
         self.driver = driver
 
     def delivery_location_textbox(self):
-        return self.driver.find_element(*DeliveryPage.deliverylocation)
+        return BaseElement(self.driver, locator=DeliveryPage.deliverylocation)
 
     def terms_checkbox(self):
-        return self.driver.find_element(*DeliveryPage.terms_chkbox)
+        return BaseElement(self.driver, locator=DeliveryPage.terms_chkbox)
 
     def purchase_button(self):
-        return self.driver.find_element(*DeliveryPage.purchase_btn)
+        return BaseElement(self.driver, locator=DeliveryPage.purchase_btn)

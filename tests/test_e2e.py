@@ -36,7 +36,7 @@ class TestOne(BaseClass):
         checkoutpage.checkoutitems().click()
 
         confirmpage.checkoutbutton().click()
-        deliverypage.delivery_location_textbox().send_keys("Ind")
+        deliverypage.delivery_location_textbox().input_text("Ind")
         self.verifyLinkPresence("India")
 
         self.driver.find_element_by_link_text("India").click()

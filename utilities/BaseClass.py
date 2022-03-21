@@ -16,6 +16,7 @@ from pageObjects.CheckoutPage import CheckoutPage
 class BaseClass:
     ROOT_PATH = str(Path(__file__).parent.parent)
     TEST_URL = "https://rahulshettyacademy.com/angularpractice"
+    #TEST_URL = "https://u01.eftps.gov/eftps/"
 
 
 
@@ -38,9 +39,10 @@ class BaseClass:
         #element.click()
 
     def select_from_dropdown_by_text(self, locator, text):
-        sel = Select(locator)
+        sel = Select(self.driver.find_element(*locator))
         sel.select_by_visible_text(text)
 
     def wait_for_element_to_be_clickable(self, locator):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
+
 
