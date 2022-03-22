@@ -22,6 +22,10 @@ class TestHomePage(BaseClass):
         alerttext = homepage.getSuccessMessage().text
 
         assert ("Success" in alerttext)
+        assert (getdata["firstname"] in homepage.getName().get_attribute('value'))
+        assert (getdata["email"] in homepage.getEmail().get_attribute('value'))
+        assert (getdata['gender'] in homepage.getGender().get_attribute('value'))
+        assert (homepage.getCheckBox().is_selected())
 
     # specific to this test only  feeding data to this test
     @pytest.fixture(params=HomePageData.test_Homepage_data)
